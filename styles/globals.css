@@ -15,7 +15,9 @@
   --red-bright: #e74c3c;
   --cream:      #f9f3e3;
   --white:      #ffffff;
-  --dark:       #0d1a09;
+  --dark:       #0a1507;
+  --glass-bg:   rgba(8, 20, 5, 0.65);
+  --glass-border: rgba(111, 207, 90, 0.18);
 }
 
 *, *::before, *::after {
@@ -30,44 +32,13 @@ html {
 }
 
 body {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  background-color: #0d1a09;
-  background-image:
-    /* grass-blade stripes */
-    repeating-linear-gradient(
-      172deg,
-      transparent 0px,
-      transparent 4px,
-      rgba(58, 140, 47, 0.07) 4px,
-      rgba(58, 140, 47, 0.07) 5px,
-      transparent 5px,
-      transparent 10px
-    ),
-    repeating-linear-gradient(
-      188deg,
-      transparent 0px,
-      transparent 6px,
-      rgba(30, 92, 21, 0.06) 6px,
-      rgba(30, 92, 21, 0.06) 7px,
-      transparent 7px,
-      transparent 14px
-    ),
-    repeating-linear-gradient(
-      179deg,
-      transparent 0px,
-      transparent 8px,
-      rgba(111, 207, 90, 0.04) 8px,
-      rgba(111, 207, 90, 0.04) 9px,
-      transparent 9px,
-      transparent 18px
-    ),
-    /* base deep-green gradient */
-    linear-gradient(
-      180deg,
-      #0a1507 0%,
-      #112208 40%,
-      #0d1a09 100%
-    );
+  font-family: 'Inter', 'Georgia', 'Times New Roman', sans-serif;
+  background-color: #0a1507;
+  /* High-quality close-up grass photo as the fixed page background */
+  background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
   color: var(--cream);
   overflow-x: hidden;
 }
@@ -91,12 +62,13 @@ body {
 .heroBg {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80');
+  /* Sweeping meadow / lush grass landscape */
+  background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80');
   background-size: cover;
-  background-position: center bottom;
+  background-position: center 60%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  filter: saturate(1.4) brightness(0.7);
+  filter: saturate(1.3) brightness(0.65);
   z-index: 0;
 }
 
@@ -106,9 +78,10 @@ body {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(13,26,9,0.3) 0%,
-    rgba(13,26,9,0.15) 40%,
-    rgba(13,26,9,0.85) 100%
+    rgba(10,21,7,0.25) 0%,
+    rgba(10,21,7,0.1) 30%,
+    rgba(10,21,7,0.55) 75%,
+    rgba(10,21,7,0.97) 100%
   );
 }
 
@@ -280,13 +253,9 @@ body {
    ============================================================ */
 
 .about {
-  background: linear-gradient(
-    180deg,
-    var(--dark) 0%,
-    #0f2a09 30%,
-    #1a3d10 60%,
-    #0d2408 100%
-  );
+  background: rgba(8, 16, 5, 0.82);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   padding: 6rem 1.5rem;
   position: relative;
   overflow: hidden;
@@ -295,12 +264,12 @@ body {
 .about::before {
   content: '';
   position: absolute;
-  top: -100px;
+  top: 0;
   left: 0;
   right: 0;
-  height: 200px;
-  background: radial-gradient(ellipse at center, rgba(58,140,47,0.3) 0%, transparent 70%);
-  pointer-events: none;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--grass-light), var(--yellow), var(--grass-light), transparent);
+  opacity: 0.7;
 }
 
 .grassDecoLeft,
@@ -350,26 +319,29 @@ body {
 /* Feature cards grid */
 .featureGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   max-width: 1100px;
   margin: 0 auto 5rem auto;
 }
 
 .featureCard {
-  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(58,140,47,0.08) 100%);
-  border: 1px solid rgba(58,140,47,0.3);
-  border-radius: 4px;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
   padding: 2rem;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
 }
 
 .featureCard:hover {
-  transform: translateY(-4px);
-  border-color: var(--grass-light);
-  box-shadow: 0 8px 32px rgba(58,140,47,0.25), 0 0 60px rgba(58,140,47,0.1);
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(111, 207, 90, 0.45);
+  background: rgba(58,140,47,0.1);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(111,207,90,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .featureCard::before {
@@ -379,7 +351,18 @@ body {
   left: 0;
   width: 3px;
   height: 100%;
-  background: linear-gradient(180deg, var(--yellow), var(--grass), var(--brown));
+  background: linear-gradient(180deg, var(--yellow), var(--grass-light), var(--grass));
+  border-radius: 12px 0 0 12px;
+}
+
+.featureCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(111,207,90,0.25));
 }
 
 .cardIcon {
@@ -409,20 +392,26 @@ body {
   max-width: 800px;
   margin: 0 auto 5rem auto;
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 3rem 2.5rem;
   position: relative;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 .quoteBlock::before {
   content: '"';
   position: absolute;
-  top: -1rem;
+  top: -2.5rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 8rem;
+  font-size: 9rem;
   line-height: 1;
-  color: var(--grass);
-  opacity: 0.25;
+  color: var(--grass-light);
+  opacity: 0.18;
   font-family: Georgia, serif;
 }
 
@@ -453,15 +442,34 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 3rem;
-  max-width: 900px;
+  gap: 0;
+  max-width: 820px;
   margin: 0 auto 5rem auto;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
 .statItem {
   text-align: center;
   flex: 1;
   min-width: 140px;
+  padding: 2.5rem 1.5rem;
+  position: relative;
+}
+
+.statItem + .statItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: var(--glass-border);
 }
 
 .statNumber {
@@ -513,12 +521,15 @@ body {
   max-width: 700px;
   margin: 0 auto 4rem auto;
   text-align: center;
-  padding: 3.5rem 2rem;
-  background: linear-gradient(135deg, rgba(58,140,47,0.12), rgba(245,230,66,0.06));
-  border: 1px solid var(--grass);
-  border-radius: 4px;
+  padding: 4rem 2.5rem;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(111, 207, 90, 0.3);
+  border-radius: 20px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(111,207,90,0.1), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .ctaBlock::before {
@@ -558,24 +569,24 @@ body {
   display: inline-block;
   background: var(--yellow);
   color: var(--dark);
-  font-family: 'Courier New', monospace;
+  font-family: 'Inter', 'Courier New', monospace;
   font-weight: 700;
   font-size: 1rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 1rem 2.5rem;
+  padding: 1rem 3rem;
   border: none;
-  border-radius: 2px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-  box-shadow: 4px 4px 0 var(--grass-dark);
+  transition: background 0.25s, box-shadow 0.25s, transform 0.25s;
+  box-shadow: 0 4px 24px rgba(245,230,66,0.35);
 }
 
 .ctaButton:hover {
   background: var(--white);
-  box-shadow: 6px 6px 0 var(--grass-dark), 0 0 40px var(--yellow-glow);
-  transform: translate(-2px, -2px);
+  box-shadow: 0 6px 40px rgba(245,230,66,0.55), 0 0 0 2px var(--yellow);
+  transform: translateY(-2px);
 }
 
 /* ============================================================
@@ -583,14 +594,16 @@ body {
    ============================================================ */
 
 .footer {
-  background: var(--dark);
-  border-top: 1px solid rgba(58,140,47,0.3);
-  padding: 2rem 1.5rem;
+  background: rgba(5, 12, 3, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(111, 207, 90, 0.15);
+  padding: 2.5rem 1.5rem;
   text-align: center;
-  font-family: 'Courier New', monospace;
+  font-family: 'Inter', 'Courier New', monospace;
   font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  color: rgba(249,243,227,0.4);
+  letter-spacing: 0.12em;
+  color: rgba(249,243,227,0.35);
 }
 
 .footer a {
