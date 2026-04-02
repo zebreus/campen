@@ -31,7 +31,43 @@ html {
 
 body {
   font-family: 'Georgia', 'Times New Roman', serif;
-  background: var(--dark);
+  background-color: #0d1a09;
+  background-image:
+    /* grass-blade stripes */
+    repeating-linear-gradient(
+      172deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(58, 140, 47, 0.07) 4px,
+      rgba(58, 140, 47, 0.07) 5px,
+      transparent 5px,
+      transparent 10px
+    ),
+    repeating-linear-gradient(
+      188deg,
+      transparent 0px,
+      transparent 6px,
+      rgba(30, 92, 21, 0.06) 6px,
+      rgba(30, 92, 21, 0.06) 7px,
+      transparent 7px,
+      transparent 14px
+    ),
+    repeating-linear-gradient(
+      179deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(111, 207, 90, 0.04) 8px,
+      rgba(111, 207, 90, 0.04) 9px,
+      transparent 9px,
+      transparent 18px
+    ),
+    /* base deep-green gradient */
+    linear-gradient(
+      180deg,
+      #0a1507 0%,
+      #112208 40%,
+      #0d1a09 100%
+    );
   color: var(--cream);
   overflow-x: hidden;
 }
@@ -59,6 +95,7 @@ body {
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   filter: saturate(1.4) brightness(0.7);
   z-index: 0;
 }
@@ -630,24 +667,22 @@ body {
 }
 
 /* ============================================================
-   FADE-IN SCROLL ANIMATION (pure CSS via @keyframes)
+   FADE-IN SCROLL ANIMATION (triggered by IntersectionObserver)
    ============================================================ */
 
 .fadeUp {
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUpIn 0.8s ease forwards;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-@keyframes fadeUpIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.fadeUp.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.delay1 { animation-delay: 0.1s; }
-.delay2 { animation-delay: 0.25s; }
-.delay3 { animation-delay: 0.4s; }
-.delay4 { animation-delay: 0.55s; }
-.delay5 { animation-delay: 0.7s; }
+.delay1 { transition-delay: 0.1s; }
+.delay2 { transition-delay: 0.25s; }
+.delay3 { transition-delay: 0.4s; }
+.delay4 { transition-delay: 0.55s; }
+.delay5 { transition-delay: 0.7s; }
