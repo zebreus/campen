@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 
 const FEATURES = [
   {
@@ -47,6 +48,23 @@ const MARQUEE_TEXT = [
 export default function Home() {
   const marqueeItems = [...MARQUEE_TEXT, ...MARQUEE_TEXT]
 
+  useEffect(() => {
+    // Scroll-triggered fade-up animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    )
+    document.querySelectorAll('.fadeUp').forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <>
       <Head>
@@ -54,6 +72,9 @@ export default function Home() {
         <meta name="description" content="DarmCamp — the hacker camp where you unplug, touch grass, and hack the revolution. Join us in the field." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
       </Head>
 
       {/* ═══════════════════════════════════════════
