@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const isGithubActions = process.env.GITHUB_ACTIONS === "true";
 const repository = process.env.GITHUB_REPOSITORY ?? "";
-const repoName = repository.split("/")[1] || "campen";
+const repoName = repository.split("/")[1] ?? "";
 const isUserPage = repoName.endsWith(".github.io");
 
 const nextConfig = {
