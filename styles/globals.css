@@ -60,6 +60,7 @@ body {
   background-size: cover;
   background-position: center 60%;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   filter: saturate(1.1) brightness(0.88);
   z-index: 0;
 }
