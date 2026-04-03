@@ -3,6 +3,14 @@
    Light, minimal, nature-inspired design
    ============================================================ */
 
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --forest:      #2d6a4f;
   --forest-dark: #1a3d2f;
