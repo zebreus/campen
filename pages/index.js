@@ -78,28 +78,54 @@ export default function Home() {
 
     let rampInterval = null
 
+    const startAudio = () => {
+      if (audioStartedRef.current) return
+      audioStartedRef.current = true
+      removeInteractionListeners()
+      audio.volume = 0.1
+      audio.play().catch(() => {})
+
+      const startTime = Date.now()
+      const rampDuration = 10000
+      const startVolume = 0.1
+
+      rampInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime
+        if (elapsed >= rampDuration) {
+          audio.volume = 1
+          clearInterval(rampInterval)
+          rampInterval = null
+        } else {
+          audio.volume = startVolume + (1 - startVolume) * (elapsed / rampDuration)
+        }
+      }, 100)
+    }
+
+    // Browsers require a trusted user gesture (click/key/touch) for audio autoplay.
+    // Scroll-based IntersectionObserver triggers alone are blocked by most browsers.
+    // Listeners are added only after the hero scrolls out of view.
+    const onInteraction = () => startAudio()
+
+    const addInteractionListeners = () => {
+      document.addEventListener('click', onInteraction)
+      document.addEventListener('keydown', onInteraction)
+      document.addEventListener('touchstart', onInteraction)
+    }
+
+    const removeInteractionListeners = () => {
+      document.removeEventListener('click', onInteraction)
+      document.removeEventListener('keydown', onInteraction)
+      document.removeEventListener('touchstart', onInteraction)
+    }
+
     const heroObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting && !audioStartedRef.current) {
-            audioStartedRef.current = true
-            audio.volume = 0.1
-            audio.play().catch(() => {})
-
-            const startTime = Date.now()
-            const rampDuration = 10000
-            const startVolume = 0.1
-
-            rampInterval = setInterval(() => {
-              const elapsed = Date.now() - startTime
-              if (elapsed >= rampDuration) {
-                audio.volume = 1
-                clearInterval(rampInterval)
-                rampInterval = null
-              } else {
-                audio.volume = startVolume + (1 - startVolume) * (elapsed / rampDuration)
-              }
-            }, 100)
+            // Try direct play — works in browsers that treat scroll as a gesture.
+            // If blocked, the interaction listeners added below will start audio.
+            startAudio()
+            if (!audioStartedRef.current) addInteractionListeners()
           }
         })
       },
@@ -111,6 +137,7 @@ export default function Home() {
       heroObserver.disconnect()
       if (rampInterval !== null) clearInterval(rampInterval)
       audio.pause()
+      removeInteractionListeners()
     }
   }, [])
 
