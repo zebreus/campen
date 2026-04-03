@@ -39,7 +39,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', 'Georgia', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--cream);
   color: var(--text);
   overflow-x: hidden;
@@ -115,6 +115,7 @@ body {
 }
 
 .heroSubtitle {
+  font-family: 'Georgia', serif;
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   font-style: italic;
   color: rgba(255,255,255,0.85);
@@ -361,6 +362,7 @@ body {
 }
 
 .quoteText {
+  font-family: 'Georgia', serif;
   font-size: clamp(1.1rem, 2.5vw, 1.7rem);
   font-style: italic;
   line-height: 1.6;
@@ -454,6 +456,7 @@ body {
 }
 
 .manifesto p em {
+  font-family: 'Georgia', serif;
   color: var(--sage);
   font-style: italic;
 }
@@ -495,6 +498,7 @@ body {
 }
 
 .ctaText {
+  font-family: 'Georgia', serif;
   font-size: 1rem;
   line-height: 1.75;
   color: rgba(255,255,255,0.72);
