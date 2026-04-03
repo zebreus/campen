@@ -80,25 +80,37 @@ export default function Home() {
 
     const startAudio = () => {
       if (audioStartedRef.current) return
+      // Set the flag synchronously to prevent duplicate in-flight play() calls
+      // if startAudio fires again before the first promise settles (e.g. rapid scroll).
+      // The .catch() handler resets it if the browser blocks autoplay.
       audioStartedRef.current = true
       removeInteractionListeners()
       audio.volume = 0.1
-      audio.play().catch(() => {})
 
-      const startTime = Date.now()
-      const rampDuration = 10000
-      const startVolume = 0.1
+      audio
+        .play()
+        .then(() => {
+          const startTime = Date.now()
+          const rampDuration = 10000
+          const startVolume = 0.1
 
-      rampInterval = setInterval(() => {
-        const elapsed = Date.now() - startTime
-        if (elapsed >= rampDuration) {
-          audio.volume = 1
-          clearInterval(rampInterval)
-          rampInterval = null
-        } else {
-          audio.volume = startVolume + (1 - startVolume) * (elapsed / rampDuration)
-        }
-      }, 100)
+          rampInterval = setInterval(() => {
+            const elapsed = Date.now() - startTime
+            if (elapsed >= rampDuration) {
+              audio.volume = 1
+              clearInterval(rampInterval)
+              rampInterval = null
+            } else {
+              audio.volume = startVolume + (1 - startVolume) * (elapsed / rampDuration)
+            }
+          }, 100)
+        })
+        .catch(() => {
+          // Autoplay was blocked by the browser; reset so the next user
+          // interaction can trigger a fresh attempt.
+          audioStartedRef.current = false
+          addInteractionListeners()
+        })
     }
 
     // Browsers require a trusted user gesture (click/key/touch) for audio autoplay.
@@ -123,9 +135,8 @@ export default function Home() {
         entries.forEach((entry) => {
           if (!entry.isIntersecting && !audioStartedRef.current) {
             // Try direct play — works in browsers that treat scroll as a gesture.
-            // If blocked, the interaction listeners added below will start audio.
+            // If blocked, startAudio's catch handler will add interaction listeners.
             startAudio()
-            if (!audioStartedRef.current) addInteractionListeners()
           }
         })
       },
