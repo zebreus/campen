@@ -150,7 +150,7 @@ export default function Home() {
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
       </Head>
 
       {/* ═══════════════════════════════════════════
@@ -310,7 +310,7 @@ export default function Home() {
             <span className="accent">Touch Grass.</span><br />
             <span className="blood">TOUCH GRASS.</span>
           </h2>
-          <p style={{ fontSize: 'clamp(1rem,2vw,1.2rem)', color: 'rgba(249,243,227,0.7)', maxWidth: '600px', margin: '1.5rem auto 0', lineHeight: 1.8, fontStyle: 'italic' }}>
+          <p style={{ fontSize: 'clamp(1rem,2vw,1.2rem)', color: 'var(--text-muted)', maxWidth: '600px', margin: '1.5rem auto 0', lineHeight: 1.8, fontStyle: 'italic' }}>
             Not metaphorically. Not digitally. Not in a simulated environment with haptic feedback.
             With your actual human hands. On actual grass. Under an actual sky.
             This is DarmCamp. This is freedom. This is love.
