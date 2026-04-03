@@ -8,8 +8,8 @@ const nextConfig = {
   output: "export",
   reactStrictMode: true,
   trailingSlash: true,
-  basePath: isGithubActions && !isUserPage ? `/${repoName}` : "",
-  assetPrefix: isGithubActions && !isUserPage ? `/${repoName}/` : "",
+  basePath: "",
+  assetPrefix: "",
   images: {
     unoptimized: true,
   },
