@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 const FEATURES = [
   {
@@ -47,6 +47,8 @@ const MARQUEE_TEXT = [
 
 export default function Home() {
   const marqueeItems = [...MARQUEE_TEXT, ...MARQUEE_TEXT]
+  const audioRef = useRef(null)
+  const audioStartedRef = useRef(false)
 
   useEffect(() => {
     // Scroll-triggered fade-up animations
@@ -63,6 +65,53 @@ export default function Home() {
     )
     document.querySelectorAll('.fadeUp').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (audioRef.current) return
+    const audio = new Audio('/assets/song.mp3')
+    audio.loop = true
+    audioRef.current = audio
+
+    const hero = document.querySelector('.hero')
+    if (!hero) return
+
+    let rampInterval = null
+
+    const heroObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting && !audioStartedRef.current) {
+            audioStartedRef.current = true
+            audio.volume = 0.1
+            audio.play().catch(() => {})
+
+            const startTime = Date.now()
+            const rampDuration = 10000
+            const startVolume = 0.1
+
+            rampInterval = setInterval(() => {
+              const elapsed = Date.now() - startTime
+              if (elapsed >= rampDuration) {
+                audio.volume = 1
+                clearInterval(rampInterval)
+                rampInterval = null
+              } else {
+                audio.volume = startVolume + (1 - startVolume) * (elapsed / rampDuration)
+              }
+            }, 100)
+          }
+        })
+      },
+      { threshold: 0 }
+    )
+    heroObserver.observe(hero)
+
+    return () => {
+      heroObserver.disconnect()
+      if (rampInterval !== null) clearInterval(rampInterval)
+      audio.pause()
+    }
   }, [])
 
   return (
