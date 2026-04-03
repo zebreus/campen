@@ -283,7 +283,7 @@ export default function Home() {
             <span className="accent">Touch Grass.</span><br />
             <span className="blood">TOUCH GRASS.</span>
           </h2>
-          <p style={{ fontSize: 'clamp(1rem,2vw,1.2rem)', color: 'rgba(249,243,227,0.7)', maxWidth: '600px', margin: '1.5rem auto 0', lineHeight: 1.8, fontStyle: 'italic' }}>
+          <p style={{ fontSize: 'clamp(1rem,2vw,1.2rem)', color: 'rgba(27,43,22,0.78)', maxWidth: '600px', margin: '1.5rem auto 0', lineHeight: 1.8, fontStyle: 'italic' }}>
             Not metaphorically. Not digitally. Not in a simulated environment with haptic feedback.
             With your actual human hands. On actual grass. Under an actual sky.
             This is DarmCamp. This is freedom. This is love.
