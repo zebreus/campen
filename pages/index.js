@@ -290,7 +290,7 @@ export default function Home() {
             I touched so much grass, man. I became the grass.
             My pull requests smell like petrichor now."
           </p>
-          <p className="quoteAuthor">— Anonymous Attendee, DarmCamp 2024</p>
+          <p className="quoteAuthor">— Anonymous Attendee, DarmCamp 2025</p>
         </div>
 
         {/* Feature Cards */}
