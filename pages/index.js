@@ -39,7 +39,7 @@ const MARQUEE_TEXT = [
   'FEEL THE EARTH',
   'HACK THE PLANET',
   'BE HERE NOW',
-  'DARMCAMP 2025',
+  'DARMCAMP 2026',
   'TOUCH GRASS',
   'UNPLUG TO PLUG IN',
   'THE GRASS IS GREENER AT DARMCAMP',
@@ -171,7 +171,7 @@ export default function Home() {
         <div className="heroBg" aria-hidden="true" />
 
         <div className="heroContent">
-          <p className="heroEyebrow">✦ Darmstadt, Germany · Summer 2025 ✦</p>
+          <p className="heroEyebrow">✦ Darmstadt, Germany · Summer 2026 ✦</p>
 
           <h1 className="heroTitle">
             Go<br />
