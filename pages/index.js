@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const FEATURES = [
   {
@@ -49,6 +49,7 @@ export default function Home() {
   const marqueeItems = [...MARQUEE_TEXT, ...MARQUEE_TEXT]
   const audioRef = useRef(null)
   const audioStartedRef = useRef(false)
+  const [showVideo, setShowVideo] = useState(false)
 
   useEffect(() => {
     // Scroll-triggered fade-up animations
@@ -340,6 +341,59 @@ export default function Home() {
           >
             🌱 Count Me In
           </a>
+        </div>
+
+        {/* EXPLAINER VIDEO */}
+        <div className="container textCenter mb5" style={{ marginTop: '5rem', marginBottom: '8rem' }}>
+          <p className="sectionLabel">✦ Why DarmCamp? ✦</p>
+          <div 
+            style={{
+              position: 'relative',
+              width: '100%',
+              maxWidth: '800px',
+              margin: '2rem auto 0',
+              aspectRatio: '16/9',
+              background: '#000',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              cursor: showVideo ? 'default' : 'pointer',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onClick={() => !showVideo && setShowVideo(true)}
+          >
+            {showVideo ? (
+              <video 
+                src="/assets/explainer.mp4" 
+                controls 
+                autoPlay 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+              />
+            ) : (
+              <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{
+                  width: '85px',
+                  height: '85px',
+                  borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+                  background: 'var(--forest)',
+                  border: '2px dashed var(--sage)',
+                  color: 'var(--cream)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '2.5rem',
+                  marginBottom: '1.5rem',
+                  boxShadow: '0 8px 32px rgba(45, 106, 79, 0.4)',
+                  transition: 'all 0.4s ease',
+                  paddingLeft: '0.5rem',
+                }}>▶</div>
+                <h3 style={{ margin: 0, color: 'var(--cream)', fontSize: '1.5rem', fontFamily: 'inherit', fontStyle: 'italic', fontWeight: '400' }}>See the Vision</h3>
+                <p style={{ color: 'var(--sage-light)', marginTop: '0.5rem', fontSize: '1rem' }}>Click to explore the meadow</p>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 

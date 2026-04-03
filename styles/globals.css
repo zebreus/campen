@@ -21,9 +21,9 @@
   --cream:       #f8f4e8;
   --cream-dark:  #eee8d0;
   --white:       #ffffff;
-  --text:        #1c2e1c;
-  --text-muted:  #5a7060;
-  --border:      rgba(82, 183, 136, 0.22);
+  --text:        #f8f4e8;
+  --text-muted:  #b7e4c7;
+  --border:      rgba(255, 255, 255, 0.15);
   --card-shadow: 0 2px 12px rgba(45, 106, 79, 0.08);
 }
 
@@ -40,7 +40,7 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--cream);
+  background-color: transparent;
   color: var(--text);
   overflow-x: hidden;
 }
@@ -62,7 +62,7 @@ body {
 }
 
 .heroBg {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-image: url('/assets/hero-bg.jpg');
   background-size: cover;
@@ -79,7 +79,7 @@ body {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(248,244,232,0.1) 0%,
+    rgba(15,36,25,0.1) 0%,
     rgba(15,36,25,0.35) 55%,
     rgba(15,36,25,0.88) 100%
   );
@@ -182,7 +182,8 @@ body {
    ============================================================ */
 
 .marqueeBar {
-  background: var(--forest);
+  background: rgba(26, 61, 47, 0.8); /* translucent var(--forest) */
+  backdrop-filter: blur(4px);
   color: var(--sage-light);
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -218,10 +219,11 @@ body {
    ============================================================ */
 
 .about {
-  background: var(--cream);
+  background: rgba(15, 36, 25, 0.75); /* more translucent var(--cream) */
   padding: 6rem 1.5rem;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(4px);
 }
 
 .about::before {
@@ -270,11 +272,11 @@ body {
 }
 
 .sectionTitle .accent {
-  color: var(--forest);
+  color: var(--sage-light);
 }
 
 .sectionTitle .blood {
-  color: var(--earth);
+  color: var(--earth-light);
 }
 
 /* Feature cards grid */
@@ -287,7 +289,7 @@ body {
 }
 
 .featureCard {
-  background: var(--white);
+  background: rgba(26, 61, 47, 0.65);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 2rem;
@@ -325,7 +327,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--forest);
+  color: var(--sage-light);
   margin-bottom: 0.65rem;
 }
 
@@ -342,7 +344,7 @@ body {
   text-align: center;
   padding: 3rem 2.5rem;
   position: relative;
-  background: var(--white);
+  background: rgba(26, 61, 47, 0.65);
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow: var(--card-shadow);
@@ -370,7 +372,7 @@ body {
 }
 
 .quoteText em {
-  color: var(--forest);
+  color: var(--sage-light);
   font-style: normal;
   font-weight: 600;
 }
@@ -392,7 +394,7 @@ body {
   gap: 0;
   max-width: 820px;
   margin: 0 auto 5rem auto;
-  background: var(--white);
+  background: rgba(26, 61, 47, 0.65);
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
@@ -420,7 +422,7 @@ body {
 .statNumber {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
-  color: var(--forest);
+  color: var(--sage-light);
   display: block;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -451,7 +453,7 @@ body {
 }
 
 .manifesto p strong {
-  color: var(--forest);
+  color: var(--sage-light);
   font-weight: 600;
 }
 
@@ -470,7 +472,8 @@ body {
   margin: 0 auto 4rem auto;
   text-align: center;
   padding: 4rem 2.5rem;
-  background: var(--forest-dark);
+  background: rgba(15, 36, 25, 0.8); /* translucent var(--forest-dark) */
+  backdrop-filter: blur(4px);
   border: 1px solid rgba(82, 183, 136, 0.2);
   border-radius: 20px;
   position: relative;
@@ -543,7 +546,8 @@ body {
    ============================================================ */
 
 .footer {
-  background: var(--cream-dark);
+  background: rgba(15, 36, 25, 0.9); /* more translucent var(--cream-dark) */
+  backdrop-filter: blur(4px);
   border-top: 1px solid var(--border);
   padding: 2.5rem 1.5rem;
   text-align: center;
@@ -553,7 +557,7 @@ body {
 }
 
 .footer a {
-  color: var(--forest);
+  color: var(--sage-light);
   text-decoration: none;
 }
 
