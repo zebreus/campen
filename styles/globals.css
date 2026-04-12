@@ -52,13 +52,20 @@ body {
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  padding-bottom: max(3rem, env(safe-area-inset-bottom));
+}
+
+@supports not (height: 100dvh) {
+  .hero {
+    min-height: 100vh;
+  }
 }
 
 .heroBg {
@@ -148,7 +155,7 @@ body {
 
 .scrollCta {
   position: absolute;
-  bottom: 2rem;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -620,6 +627,21 @@ body {
    ============================================================ */
 
 @media (max-width: 640px) {
+  .hero {
+    padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+  }
+
+  .scrollCta {
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    gap: 0.35rem;
+    font-size: 0.68rem;
+  }
+
+  .scrollArrow {
+    width: 16px;
+    height: 16px;
+  }
+
   .featureGrid {
     grid-template-columns: 1fr;
   }
