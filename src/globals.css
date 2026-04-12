@@ -511,13 +511,3 @@ footer a:hover {
   }
 }
 
-.fadeUp {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fadeUp.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
