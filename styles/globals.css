@@ -193,11 +193,14 @@ body {
   padding: 0.65rem 0;
   overflow: hidden;
   white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .marqueeTrack {
   display: inline-block;
-  animation: marquee 18s linear infinite;
+  animation: marquee 45s linear infinite;
 }
 
 @keyframes marquee {
@@ -207,12 +210,12 @@ body {
 
 .marqueeItem {
   display: inline-block;
-  padding: 0 2rem;
+  padding: 0 4rem;
 }
-
+/* 
 .marqueeItem::before {
   content: '🌿 ';
-}
+} */
 
 /* ============================================================
    ABOUT / MARKETING SECTION

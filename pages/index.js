@@ -169,7 +169,7 @@ export default function Home() {
         <div className="heroBg" aria-hidden="true" />
 
         <div className="heroContent">
-          <p className="heroEyebrow">✦ Darmstadt, Germany · Summer 2026 ✦</p>
+          <p className="heroEyebrow">✦ Mainz, Germany · Summer 2026 ✦</p>
 
           <h1 className="heroTitle">
             Go<br />
@@ -182,25 +182,9 @@ export default function Home() {
             Put down the keyboard. Feel the dew. <em>Be free.</em>
           </p>
 
-          <div className="grassEmojis" aria-hidden="true">
+          {/* <div className="grassEmojis" aria-hidden="true">
             🌿🌾🍀🌿🌱🌾🌿
-          </div>
-        </div>
-
-        <div className="grassField" aria-hidden="true">
-          <div className="grassBlades">
-            {Array.from({ length: 80 }).map((_, i) => (
-              <div
-                key={i}
-                className="blade"
-                style={{
-                  height: `${30 + Math.sin(i * 0.7) * 20 + Math.cos(i * 1.3) * 15}px`,
-                  opacity: 0.6 + Math.sin(i * 0.5) * 0.3,
-                  animationDelay: `${(i * 0.08) % 2}s`,
-                }}
-              />
-            ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="scrollCta" aria-label="Scroll down">
@@ -209,9 +193,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════
-          MARQUEE
-      ═══════════════════════════════════════════ */}
       <div className="marqueeBar" aria-hidden="true">
         <div className="marqueeTrack">
           {marqueeItems.map((item, i) => (
@@ -261,7 +242,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Stats */}
+        {/* 
         <div className="statsRow">
           <div className="statItem fadeUp delay1">
             <span className="statNumber">3</span>
@@ -279,7 +260,7 @@ export default function Home() {
             <span className="statNumber">0</span>
             <span className="statLabel">standing desks</span>
           </div>
-        </div>
+        </div> */}
 
         {/* Quote */}
         <div className="quoteBlock fadeUp delay2">
@@ -292,7 +273,7 @@ export default function Home() {
         </div>
 
         {/* Feature Cards */}
-        <div className="container">
+        {/* <div className="container">
           <div className="textCenter mb3">
             <p className="sectionLabel">✦ What Awaits You ✦</p>
             <h2 className="sectionTitle fadeUp">
@@ -309,7 +290,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Second marquee-style text block */}
         <div className="container textCenter mb5" style={{ marginTop: '5rem' }}>
@@ -402,7 +383,7 @@ export default function Home() {
       ═══════════════════════════════════════════ */}
       <footer className="footer">
         <p>
-          🌿 DARMCAMP · Somewhere in a field · Darmstadt, Germany ·{' '}
+          🌿 DARMCAMP · Somewhere in a field · Mainz, Germany ·{' '}
           <a href="mailto:camp@darm.camp">camp@darm.camp</a>
         </p>
         <p style={{ marginTop: '0.5rem' }}>
