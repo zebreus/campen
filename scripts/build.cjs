@@ -7,10 +7,10 @@ const root = path.resolve(__dirname, "..");
 const outDir = path.join(root, "out");
 const template = require(path.join(root, "src", "index.marko")).default;
 const cssPlaceholder = "__INLINE_GLOBALS_CSS__";
-const stylesPath = path.join(root, "styles", "globals.css");
+const stylesPath = path.join(root, "assets", "globals.css");
 const cssInlineAssets = {
-  "/assets/InterVariable.woff2": path.join(root, "public", "assets", "InterVariable.woff2"),
-  "/assets/hero-bg.jpg": path.join(root, "public", "assets", "hero-bg.jpg"),
+  "/assets/InterVariable.woff2": path.join(root, "assets", "InterVariable.woff2"),
+  "/assets/hero-bg.jpg": path.join(root, "assets", "hero-bg.jpg"),
 };
 
 function ensureDir(dir) {
@@ -69,10 +69,6 @@ function main() {
   fs.writeFileSync(path.join(outDir, "index.html"), html, "utf8");
 
   copyRecursive(path.join(root, "public", "assets"), path.join(outDir, "assets"));
-  copyRecursive(path.join(root, "styles"), path.join(outDir, "styles"));
-
-  const outCssPath = path.join(outDir, "styles", "globals.css");
-  fs.writeFileSync(outCssPath, processedCss, "utf8");
 }
 
 main();
