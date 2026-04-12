@@ -59,7 +59,7 @@ body {
 .hero > div[aria-hidden="true"] {
   position: fixed;
   inset: 0;
-  background-image: url('/hero-bg.jpg');
+  background-image: url('/background.webp');
   background-size: cover;
   background-position: center 60%;
   background-repeat: no-repeat;

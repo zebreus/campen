@@ -10,14 +10,14 @@ const cssInlineAssets = {
     "../src/InterVariable.woff2",
     import.meta.url,
   ),
-  "/hero-bg.jpg": new URL("../src/hero-bg.jpg", import.meta.url),
+  "/background.webp": new URL("../src/background.webp", import.meta.url),
 } as const;
 // Files handled by the build step — not copied verbatim to out/
 const skipInBuild = new Set([
   "index.html",
   "globals.css",
   "InterVariable.woff2",
-  "hero-bg.jpg",
+  "background.webp",
 ]);
 
 async function ensureDir(dir: string | URL) {
@@ -68,6 +68,9 @@ function mimeType(filePath: string) {
   }
   if (lower.endsWith(".jpg") || lower.endsWith(".jpeg")) {
     return "image/jpeg";
+  }
+  if (lower.endsWith(".webp")) {
+    return "image/webp";
   }
   throw new Error(`Unsupported inline asset type: ${filePath}`);
 }
