@@ -35,12 +35,10 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
 }
 
 body {
   font-family: 'Inter', serif;
-  background-color: transparent;
   color: var(--text);
   overflow-x: hidden;
 }
@@ -51,7 +49,6 @@ body {
 
 .hero {
   position: relative;
-  width: 100%;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -99,7 +96,6 @@ body {
 }
 
 .heroEyebrow {
-  font-family: 'Inter', serif;
   font-size: clamp(0.7rem, 1.8vw, 0.9rem);
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -131,7 +127,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   line-height: 1.65;
-  font-weight: 400;
 }
 
 .heroSubtitle strong {
@@ -153,7 +148,6 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-family: 'Inter', serif;
   z-index: 2;
   animation: bounce 2.5s ease-in-out infinite;
 }
@@ -179,7 +173,6 @@ body {
   background: rgba(26, 61, 47, 0.8); /* translucent var(--forest) */
   backdrop-filter: blur(4px);
   color: var(--sage-light);
-  font-family: 'Inter', serif;
   font-weight: 500;
   font-size: 0.8rem;
   letter-spacing: 0.22em;
@@ -244,8 +237,23 @@ body {
 .grassDecoLeft { left: 0; transform: scaleX(-1); }
 .grassDecoRight { right: 0; }
 
-.sectionLabel {
-  font-family: 'Inter', serif;
+.about > header,
+.about > section {
+  max-width: 1100px;
+  margin: 0 auto 5rem;
+  text-align: center;
+}
+
+.about > section:first-of-type {
+  margin-top: 5rem;
+}
+
+.about > section:last-of-type {
+  margin-top: 5rem;
+  margin-bottom: 8rem;
+}
+
+.about > :is(header, section) > p:first-child {
   font-size: 0.72rem;
   letter-spacing: 0.38em;
   text-transform: uppercase;
@@ -254,7 +262,7 @@ body {
   font-weight: 500;
 }
 
-.sectionTitle {
+.about > :is(header, section:first-of-type) > h2 {
   font-size: clamp(2rem, 5.5vw, 4.5rem);
   font-weight: 700;
   line-height: 1.05;
@@ -264,16 +272,25 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.sectionTitle .accent {
+.about > :is(header, section:first-of-type) > h2 span:first-of-type {
   color: var(--sage-light);
 }
 
-.sectionTitle .blood {
+.about > :is(header, section:first-of-type) > h2 span:last-of-type {
   color: var(--earth-light);
 }
 
+.about > section:first-of-type > p:last-child {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  line-height: 1.8;
+  font-style: italic;
+}
+
 /* Big quote block */
-.quoteBlock {
+.about > blockquote {
   max-width: 760px;
   margin: 0 auto 5rem auto;
   text-align: center;
@@ -285,7 +302,7 @@ body {
   box-shadow: var(--card-shadow);
 }
 
-.quoteBlock::before {
+.about > blockquote::before {
   content: '"';
   position: absolute;
   top: -2rem;
@@ -298,7 +315,7 @@ body {
   font-family: Georgia, serif;
 }
 
-.quoteText {
+.about > blockquote > p:first-of-type {
   font-family: 'Georgia', serif;
   font-size: clamp(1.1rem, 2.5vw, 1.7rem);
   font-style: italic;
@@ -306,13 +323,13 @@ body {
   color: var(--text);
 }
 
-.quoteText em {
+.about > blockquote > p:first-of-type em {
   color: var(--sage-light);
   font-style: normal;
   font-weight: 600;
 }
 
-.quoteAuthor {
+.about > blockquote > p:last-of-type {
   margin-top: 1.5rem;
   font-size: 0.78rem;
   letter-spacing: 0.2em;
@@ -322,25 +339,25 @@ body {
 }
 
 /* Manifesto / copy section */
-.manifesto {
+.about > article {
   max-width: 680px;
   margin: 0 auto 5rem auto;
   padding: 0 1rem;
 }
 
-.manifesto p {
+.about > article p {
   font-size: clamp(1rem, 1.8vw, 1.1rem);
   line-height: 1.9;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
 }
 
-.manifesto p strong {
+.about > article p strong {
   color: var(--sage-light);
   font-weight: 600;
 }
 
-.manifesto p em {
+.about > article p em {
   font-family: 'Georgia', serif;
   color: var(--sage);
   font-style: italic;
@@ -350,7 +367,7 @@ body {
    REGISTER CTA BLOCK
    ============================================================ */
 
-.ctaBlock {
+.about > aside {
   max-width: 660px;
   margin: 0 auto 4rem auto;
   text-align: center;
@@ -364,7 +381,7 @@ body {
   box-shadow: 0 12px 40px rgba(45, 106, 79, 0.18);
 }
 
-.ctaBlock::before {
+.about > aside::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -372,18 +389,16 @@ body {
   pointer-events: none;
 }
 
-.ctaTitle {
+.about > aside > h3 {
   font-size: clamp(1.6rem, 4vw, 2.5rem);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.02em;
   color: var(--white);
   margin-bottom: 1rem;
-  position: relative;
-  z-index: 1;
 }
 
-.ctaText {
+.about > aside > p {
   font-family: 'Georgia', serif;
   font-size: 1rem;
   line-height: 1.75;
@@ -393,35 +408,80 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2rem;
-  position: relative;
-  z-index: 1;
 }
 
-.ctaButton {
+.about > aside > a {
   display: inline-block;
   background: var(--sage);
   color: var(--white);
-  font-family: 'Inter', serif;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   padding: 0.9rem 2.5rem;
-  border: none;
   border-radius: 50px;
-  cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
   box-shadow: 0 4px 16px rgba(82,183,136,0.3);
-  position: relative;
-  z-index: 1;
 }
 
-.ctaButton:hover {
+.about > aside > a:hover {
   background: var(--sage-light);
   color: var(--forest-dark);
   box-shadow: 0 6px 24px rgba(82,183,136,0.45);
   transform: translateY(-2px);
+}
+
+.explainerPlaceholder {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto 0;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.explainerPlaceholder > div {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.explainerPlaceholder > div > div {
+  width: 85px;
+  height: 85px;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  background: var(--forest);
+  border: 2px dashed var(--sage);
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 32px rgba(45, 106, 79, 0.4);
+  padding-left: 0.5rem;
+}
+
+.explainerPlaceholder h3 {
+  margin: 0;
+  color: var(--cream);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.explainerPlaceholder p {
+  color: var(--sage-light);
+  margin-top: 0.5rem;
 }
 
 /* ============================================================
@@ -449,18 +509,6 @@ body {
 }
 
 /* ============================================================
-   SECTION WRAPPERS
-   ============================================================ */
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.textCenter { text-align: center; }
-.mb5 { margin-bottom: 5rem; }
-
-/* ============================================================
    RESPONSIVE
    ============================================================ */
 
@@ -480,7 +528,7 @@ body {
     height: 16px;
   }
 
-  .ctaBlock {
+  .about > aside {
     padding: 2.5rem 1.5rem;
   }
 }
