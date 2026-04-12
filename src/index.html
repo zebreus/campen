@@ -141,186 +141,54 @@
 
         <script>
             (() => {
-                const fadeUpObserver = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add("visible");
-                                fadeUpObserver.unobserve(entry.target);
-                            }
-                        });
-                    },
+                // Fade-up on scroll
+                const fadeUp = new IntersectionObserver(
+                    (entries) => entries.forEach((e) => {
+                        if (e.isIntersecting) { e.target.classList.add("visible"); fadeUp.unobserve(e.target); }
+                    }),
                     { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
                 );
+                document.querySelectorAll(".fadeUp").forEach((el) => fadeUp.observe(el));
 
-                document
-                    .querySelectorAll(".fadeUp")
-                    .forEach((el) => fadeUpObserver.observe(el));
+                // Background audio with volume ramping
+                let audio, started, rampTimer, ac;
 
-                let audio = null;
-
-                const hero = document.querySelector(".hero");
-                const startState = { started: false };
-                const rampState = { volumeInterval: null };
-
-                const onInteraction = () => startAudio();
-
-                const addInteractionListeners = () => {
-                    document.addEventListener("click", onInteraction);
-                    document.addEventListener("keydown", onInteraction);
-                    document.addEventListener("touchstart", onInteraction);
-                };
-
-                const removeInteractionListeners = () => {
-                    document.removeEventListener("click", onInteraction);
-                    document.removeEventListener("keydown", onInteraction);
-                    document.removeEventListener("touchstart", onInteraction);
-                };
-
-                const getAudio = () => {
-                    if (audio) {
-                        return audio;
-                    }
-
-                    audio = new Audio("/song.mp3");
-                    audio.loop = true;
-                    return audio;
-                };
-
-                const rampAudioVolume = (
-                    targetAudio,
-                    targetVolume,
-                    duration,
-                ) => {
-                    if (rampState.volumeInterval !== null) {
-                        clearInterval(rampState.volumeInterval);
-                        rampState.volumeInterval = null;
-                    }
-
-                    const startTime = Date.now();
-                    const startVolume = targetAudio.volume;
-
-                    rampState.volumeInterval = setInterval(() => {
-                        const elapsed = Date.now() - startTime;
-                        if (elapsed >= duration) {
-                            targetAudio.volume = targetVolume;
-                            clearInterval(rampState.volumeInterval);
-                            rampState.volumeInterval = null;
-                            return;
-                        }
-
-                        targetAudio.volume =
-                            startVolume +
-                            (targetVolume - startVolume) * (elapsed / duration);
+                const ramp = (to, ms) => {
+                    clearInterval(rampTimer);
+                    const from = audio.volume, t0 = Date.now();
+                    rampTimer = setInterval(() => {
+                        const p = Math.min((Date.now() - t0) / ms, 1);
+                        audio.volume = from + (to - from) * p;
+                        if (p === 1) clearInterval(rampTimer);
                     }, 100);
                 };
 
-                const startAudio = () => {
-                    if (startState.started) {
-                        return;
-                    }
-
-                    const targetAudio = getAudio();
-                    startState.started = true;
-                    removeInteractionListeners();
-                    targetAudio.volume = 0.1;
-
-                    targetAudio
-                        .play()
-                        .then(() => {
-                            rampAudioVolume(targetAudio, 1, 10000);
-                        })
-                        .catch(() => {
-                            startState.started = false;
-                            addInteractionListeners();
-                        });
+                const listen = () => {
+                    ac = new AbortController();
+                    for (const ev of ["click", "keydown", "touchstart"])
+                        document.addEventListener(ev, startAudio, { signal: ac.signal });
                 };
 
-                if (hero) {
-                    const heroObserver = new IntersectionObserver(
-                        (entries) => {
-                            entries.forEach((entry) => {
-                                if (
-                                    !entry.isIntersecting &&
-                                    !startState.started
-                                ) {
-                                    startAudio();
-                                }
-                            });
-                        },
-                        { threshold: 0 },
-                    );
+                const startAudio = () => {
+                    if (started) return;
+                    started = true;
+                    if (ac) ac.abort();
+                    audio ??= Object.assign(new Audio("/song.mp3"), { loop: true });
+                    audio.volume = 0.1;
+                    audio.play().then(() => ramp(1, 10000)).catch(() => { started = false; listen(); });
+                };
 
-                    heroObserver.observe(hero);
+                // Try immediately; browsers that block autoplay will fall back to listen()
+                startAudio();
 
-                    window.addEventListener("beforeunload", () => {
-                        heroObserver.disconnect();
-                        fadeUpObserver.disconnect();
-                        if (rampState.volumeInterval !== null) {
-                            clearInterval(rampState.volumeInterval);
-                            rampState.volumeInterval = null;
-                        }
-                        if (audio) {
-                            audio.pause();
-                        }
-                        removeInteractionListeners();
-                    });
-                }
-
-                const explainerPlaceholder = document.getElementById(
-                    "explainer-placeholder",
-                );
-                if (explainerPlaceholder) {
-                    explainerPlaceholder.addEventListener(
-                        "click",
-                        () => {
-                            const video = document.createElement("video");
-                            video.src = "/explainer.mp4";
-                            video.controls = true;
-                            video.autoplay = true;
-
-                            const duckDuration = 1200;
-                            const duckTo = 0.1;
-                            const restoreTo = 1;
-                            const syncAudioToVideoState = () => {
-                                if (!audio || audio.paused) {
-                                    return;
-                                }
-
-                                if (!video.paused && !video.ended) {
-                                    rampAudioVolume(
-                                        audio,
-                                        duckTo,
-                                        duckDuration,
-                                    );
-                                } else {
-                                    rampAudioVolume(
-                                        audio,
-                                        restoreTo,
-                                        duckDuration,
-                                    );
-                                }
-                            };
-
-                            video.addEventListener(
-                                "play",
-                                syncAudioToVideoState,
-                            );
-                            video.addEventListener(
-                                "pause",
-                                syncAudioToVideoState,
-                            );
-                            video.addEventListener(
-                                "ended",
-                                syncAudioToVideoState,
-                            );
-
-                            explainerPlaceholder.style.cursor = "default";
-                            explainerPlaceholder.replaceChildren(video);
-                        },
-                        { once: true },
-                    );
-                }
+                // Explainer video — swap placeholder on click, duck audio during playback
+                const placeholder = document.getElementById("explainer-placeholder");
+                if (placeholder) placeholder.addEventListener("click", () => {
+                    const video = Object.assign(document.createElement("video"), { src: "/explainer.mp4", controls: true, autoplay: true });
+                    const sync = () => { if (audio && !audio.paused) ramp(video.paused || video.ended ? 1 : 0.1, 1200); };
+                    for (const ev of ["play", "pause", "ended"]) video.addEventListener(ev, sync);
+                    placeholder.replaceChildren(video);
+                }, { once: true });
             })();
         </script>
     </body>
