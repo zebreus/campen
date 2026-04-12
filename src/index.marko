@@ -12,7 +12,7 @@
             rel="icon"
             href="data:image/svg+xml,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 100 100&#x27;&gt;&lt;text y=&#x27;.9em&#x27; font-size=&#x27;90&#x27;&gt;🌿&lt;/text&gt;&lt;/svg&gt;"
         >
-        <link rel="stylesheet" href="/styles/globals.css">
+        <style>__INLINE_GLOBALS_CSS__</style>
     </head>
     <body>
         <div id="__next">
@@ -76,13 +76,13 @@
                     <p>
                         The fluorescent lights have been lying to you. The
                         standing desk, the hot-desk, the cold-brew; none of it
-                        is real.<strong>${" "}DarmCamp is real.</strong>
+                        is real. <strong>DarmCamp is real.</strong>
                     </p>
                     <p>
                         We are a tribe of hackers, makers, dreamers, and freaks
                         who gather once a year in a field outside Darmstadt to
-                        remember the ancient wisdom:<em>grass exists, and you
-                            can touch it.</em>
+                        remember the ancient wisdom:
+                        <em>grass exists, and you can touch it.</em>
                     </p>
                     <p>
                         Three days of camping, hacking, soldering, jamming,
@@ -92,7 +92,7 @@
                     </p>
                     <p>
                         This is not a conference. This is not a hackathon. This
-                        is a <em>happening</em>; a festival of minds, a communion
+                        is a <em>happening</em>, a festival of minds, a communion
                         of curious souls who believe that the best debugging environment
                         is a meadow at golden hour with a cold drink in your hand.
                     </p>
@@ -189,11 +189,11 @@
                     .querySelectorAll(".fadeUp")
                     .forEach((el) => fadeUpObserver.observe(el));
 
-                const audio = new Audio("/assets/song.mp3");
-                audio.loop = true;
+                let audio = null;
 
                 const hero = document.querySelector(".hero");
-                const startState = { started: false, rampInterval: null };
+                const startState = { started: false };
+                const rampState = { volumeInterval: null };
 
                 const onInteraction = () => startAudio();
 
@@ -209,35 +209,59 @@
                     document.removeEventListener("touchstart", onInteraction);
                 };
 
+                const getAudio = () => {
+                    if (audio) {
+                        return audio;
+                    }
+
+                    // Lazy-load audio only once playback is attempted.
+                    audio = new Audio("/assets/song.mp3");
+                    audio.loop = true;
+                    return audio;
+                };
+
+                const rampAudioVolume = (
+                    targetAudio,
+                    targetVolume,
+                    duration,
+                ) => {
+                    if (rampState.volumeInterval !== null) {
+                        clearInterval(rampState.volumeInterval);
+                        rampState.volumeInterval = null;
+                    }
+
+                    const startTime = Date.now();
+                    const startVolume = targetAudio.volume;
+
+                    rampState.volumeInterval = setInterval(() => {
+                        const elapsed = Date.now() - startTime;
+                        if (elapsed >= duration) {
+                            targetAudio.volume = targetVolume;
+                            clearInterval(rampState.volumeInterval);
+                            rampState.volumeInterval = null;
+                            return;
+                        }
+
+                        targetAudio.volume =
+                            startVolume +
+                            (targetVolume - startVolume) * (elapsed / duration);
+                    }, 100);
+                };
+
                 const startAudio = () => {
                     if (startState.started) {
                         return;
                     }
 
+                    const targetAudio = getAudio();
                     startState.started = true;
                     removeInteractionListeners();
-                    audio.volume = 0.1;
+                    targetAudio.volume = 0.1;
 
-                    audio
+                    targetAudio
                         .play()
                         .then(() => {
-                            const startTime = Date.now();
-                            const rampDuration = 10000;
-                            const startVolume = 0.1;
-
-                            startState.rampInterval = setInterval(() => {
-                                const elapsed = Date.now() - startTime;
-                                if (elapsed >= rampDuration) {
-                                    audio.volume = 1;
-                                    clearInterval(startState.rampInterval);
-                                    startState.rampInterval = null;
-                                } else {
-                                    audio.volume =
-                                        startVolume +
-                                        (1 - startVolume) *
-                                            (elapsed / rampDuration);
-                                }
-                            }, 100);
+                            rampAudioVolume(targetAudio, 1, 10000);
                         })
                         .catch(() => {
                             startState.started = false;
@@ -265,10 +289,13 @@
                     window.addEventListener("beforeunload", () => {
                         heroObserver.disconnect();
                         fadeUpObserver.disconnect();
-                        if (startState.rampInterval !== null) {
-                            clearInterval(startState.rampInterval);
+                        if (rampState.volumeInterval !== null) {
+                            clearInterval(rampState.volumeInterval);
+                            rampState.volumeInterval = null;
                         }
-                        audio.pause();
+                        if (audio) {
+                            audio.pause();
+                        }
                         removeInteractionListeners();
                     });
                 }
@@ -287,6 +314,42 @@
                             video.style.width = "100%";
                             video.style.height = "100%";
                             video.style.objectFit = "cover";
+
+                            const duckDuration = 1200;
+                            const duckTo = 0.1;
+                            const restoreTo = 1;
+                            const syncAudioToVideoState = () => {
+                                if (!audio || audio.paused) {
+                                    return;
+                                }
+
+                                if (!video.paused && !video.ended) {
+                                    rampAudioVolume(
+                                        audio,
+                                        duckTo,
+                                        duckDuration,
+                                    );
+                                } else {
+                                    rampAudioVolume(
+                                        audio,
+                                        restoreTo,
+                                        duckDuration,
+                                    );
+                                }
+                            };
+
+                            video.addEventListener(
+                                "play",
+                                syncAudioToVideoState,
+                            );
+                            video.addEventListener(
+                                "pause",
+                                syncAudioToVideoState,
+                            );
+                            video.addEventListener(
+                                "ended",
+                                syncAudioToVideoState,
+                            );
 
                             explainerPlaceholder.style.cursor = "default";
                             explainerPlaceholder.replaceChildren(video);
