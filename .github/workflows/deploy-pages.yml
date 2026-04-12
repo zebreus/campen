@@ -1,4 +1,4 @@
-name: Deploy Next.js site to Pages
+name: Deploy Marko site to Pages
 
 on:
   push:
@@ -35,6 +35,14 @@ jobs:
 
       - name: Build static export
         run: npm run build
+
+      - name: Verify output files
+        run: |
+          test -f out/index.html
+          test -f out/styles/globals.css
+          test -f out/assets/song.mp3
+          test -f out/assets/explainer.mp4
+          test -f out/assets/hero-bg.jpg
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
