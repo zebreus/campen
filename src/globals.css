@@ -188,7 +188,9 @@ body {
 }
 
 .about {
-  background: rgba(15, 36, 25, 0.75);
+  background:
+    linear-gradient(90deg, transparent, var(--sage), transparent) top / 100% 2px no-repeat,
+    rgba(15, 36, 25, 0.75);
   padding: 6rem 1.5rem;
   position: relative;
   overflow: hidden;
@@ -199,18 +201,22 @@ body {
 }
 
 .about::before {
-  content: '';
+  content: '🌿🌿🌿';
   position: absolute;
-  top: 0;
   left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--sage), transparent);
-  opacity: 0.5;
+  bottom: 0;
+  font-size: clamp(3rem, 8vw, 6rem);
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  transform: scaleX(-1);
 }
 
-.about > div:nth-child(-n + 2) {
+.about::after {
+  content: '🌿🌿🌿';
   position: absolute;
+  right: 0;
   bottom: 0;
   font-size: clamp(3rem, 8vw, 6rem);
   opacity: 0.07;
@@ -219,10 +225,6 @@ body {
   line-height: 1;
 }
 
-.about > div:first-child { left: 0; transform: scaleX(-1); }
-.about > div:nth-child(2) { right: 0; }
-
-.about > header,
 .about > section {
   width: 100%;
   max-width: 1100px;
@@ -230,7 +232,8 @@ body {
   text-align: center;
 }
 
-.about > :is(header, section) > p:first-child {
+.about > section > p:first-child,
+.about > section > header > p:first-child {
   font-size: 0.72rem;
   letter-spacing: 0.38em;
   text-transform: uppercase;
@@ -239,7 +242,7 @@ body {
   font-weight: 500;
 }
 
-.about > :is(header, section:first-of-type) > h2 {
+.about section h2 {
   font-size: clamp(2rem, 5.5vw, 4.5rem);
   font-weight: 700;
   line-height: 1.05;
@@ -249,15 +252,15 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.about > :is(header, section:first-of-type) > h2 span:first-of-type {
+.about section h2 span:first-of-type {
   color: var(--sage-light);
 }
 
-.about > :is(header, section:first-of-type) > h2 span:last-of-type {
+.about section h2 span:last-of-type {
   color: var(--earth-light);
 }
 
-.about > section:first-of-type > p:last-child {
+.about > section > h2 + p {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--text-muted);
   max-width: 600px;
@@ -266,7 +269,7 @@ body {
   font-style: italic;
 }
 
-.about > blockquote {
+.about > section > blockquote {
   max-width: 760px;
   margin: 0 auto;
   text-align: center;
@@ -278,7 +281,7 @@ body {
   box-shadow: var(--card-shadow);
 }
 
-.about > blockquote::before {
+.about > section > blockquote::before {
   content: '"';
   position: absolute;
   top: -2rem;
@@ -291,7 +294,7 @@ body {
   font-family: Georgia, serif;
 }
 
-.about > blockquote > p:first-of-type {
+.about > section > blockquote > p:first-of-type {
   font-family: 'Georgia', serif;
   font-size: clamp(1.1rem, 2.5vw, 1.7rem);
   font-style: italic;
@@ -299,13 +302,13 @@ body {
   color: var(--text);
 }
 
-.about > blockquote > p:first-of-type em {
+.about > section > blockquote > p:first-of-type em {
   color: var(--sage-light);
   font-style: normal;
   font-weight: 600;
 }
 
-.about > blockquote > p:last-of-type {
+.about > section > blockquote > p:last-of-type {
   margin-top: 1.5rem;
   font-size: 0.78rem;
   letter-spacing: 0.2em;
@@ -314,31 +317,31 @@ body {
   font-weight: 500;
 }
 
-.about > article {
+.about > section > article {
   max-width: 680px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-.about > article p {
+.about > section > article p {
   font-size: clamp(1rem, 1.8vw, 1.1rem);
   line-height: 1.9;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
 }
 
-.about > article p strong {
+.about > section > article p strong {
   color: var(--sage-light);
   font-weight: 600;
 }
 
-.about > article p em {
+.about > section > article p em {
   font-family: 'Georgia', serif;
   color: var(--sage);
   font-style: italic;
 }
 
-.about > aside {
+.about > section:last-child {
   max-width: 660px;
   margin: 0 auto;
   text-align: center;
@@ -352,7 +355,7 @@ body {
   box-shadow: 0 12px 40px rgba(45, 106, 79, 0.18);
 }
 
-.about > aside::before {
+.about > section:last-child::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -360,7 +363,7 @@ body {
   pointer-events: none;
 }
 
-.about > aside > h3 {
+.about > section:last-child > h3 {
   font-size: clamp(1.6rem, 4vw, 2.5rem);
   font-weight: 700;
   text-transform: uppercase;
@@ -369,7 +372,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.about > aside > p {
+.about > section:last-child > p {
   font-family: 'Georgia', serif;
   font-size: 1rem;
   line-height: 1.75;
@@ -381,7 +384,7 @@ body {
   margin-bottom: 2rem;
 }
 
-.about > aside > a {
+.about > section:last-child > a {
   display: inline-block;
   background: var(--sage);
   color: var(--white);
@@ -396,7 +399,7 @@ body {
   box-shadow: 0 4px 16px rgba(82,183,136,0.3);
 }
 
-.about > aside > a:hover {
+.about > section:last-child > a:hover {
   background: var(--sage-light);
   color: var(--forest-dark);
   box-shadow: 0 6px 24px rgba(82,183,136,0.45);
@@ -501,7 +504,7 @@ footer a:hover {
     height: 16px;
   }
 
-  .about > aside {
+  .about > section:last-child {
     padding: 2.5rem 1.5rem;
   }
 }
