@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/InterVariable.ttf') format('truetype');
+  src: url('/fonts/InterVariable.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -39,7 +39,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', serif;
   background-color: transparent;
   color: var(--text);
   overflow-x: hidden;
@@ -92,7 +92,7 @@ body {
 }
 
 .heroEyebrow {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', serif;
   font-size: clamp(0.7rem, 1.8vw, 0.9rem);
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -159,7 +159,7 @@ body {
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', serif;
   z-index: 2;
   animation: bounce 2.5s ease-in-out infinite;
 }
@@ -185,7 +185,7 @@ body {
   background: rgba(26, 61, 47, 0.8); /* translucent var(--forest) */
   backdrop-filter: blur(4px);
   color: var(--sage-light);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', serif;
   font-weight: 500;
   font-size: 0.8rem;
   letter-spacing: 0.22em;
@@ -252,7 +252,7 @@ body {
 .grassDecoRight { right: 0; }
 
 .sectionLabel {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', serif;
   font-size: 0.72rem;
   letter-spacing: 0.38em;
   text-transform: uppercase;
@@ -518,7 +518,7 @@ body {
   display: inline-block;
   background: var(--sage);
   color: var(--white);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', serif;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.08em;
