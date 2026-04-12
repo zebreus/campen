@@ -9,6 +9,7 @@ const template = require(path.join(root, "src", "index.marko")).default;
 const cssPlaceholder = "__INLINE_GLOBALS_CSS__";
 const stylesPath = path.join(root, "styles", "globals.css");
 const cssInlineAssets = {
+  "/assets/InterVariable.woff2": path.join(root, "public", "assets", "InterVariable.woff2"),
   "/assets/hero-bg.jpg": path.join(root, "public", "assets", "hero-bg.jpg"),
 };
 
@@ -29,6 +30,9 @@ function mimeType(filePath) {
   const ext = path.extname(filePath).toLowerCase();
   if (ext === ".mp3") {
     return "audio/mpeg";
+  }
+  if (ext === ".woff2") {
+    return "font/woff2";
   }
   if (ext === ".jpg" || ext === ".jpeg") {
     return "image/jpeg";
