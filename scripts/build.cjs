@@ -1,11 +1,9 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-require("@marko/compiler/register");
-
 const root = path.resolve(__dirname, "..");
 const outDir = path.join(root, "out");
-const template = require(path.join(root, "src", "index.marko")).default;
+const templatePath = path.join(root, "src", "index.html");
 const cssPlaceholder = "__INLINE_GLOBALS_CSS__";
 const stylesPath = path.join(root, "assets", "globals.css");
 const cssInlineAssets = {
@@ -65,7 +63,7 @@ function main() {
   const sourceCss = fs.readFileSync(stylesPath, "utf8");
   const processedCss = inlineAssetUrls(sourceCss, inlinedCssDataUrls);
 
-  const html = template.renderSync({}).toString().split(cssPlaceholder).join(processedCss);
+  const html = fs.readFileSync(templatePath, "utf8").split(cssPlaceholder).join(processedCss);
   fs.writeFileSync(path.join(outDir, "index.html"), html, "utf8");
 
   copyRecursive(path.join(root, "public"), outDir);

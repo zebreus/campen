@@ -7,10 +7,6 @@
     "build": "node scripts/build.cjs",
     "start": "npx serve out"
   },
-  "dependencies": {
-    "@marko/compiler": "^5.37.6",
-    "marko": "^5.37.6"
-  },
   "devDependencies": {
     "serve": "^14.2.4"
   }

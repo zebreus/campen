@@ -1,5 +1,5 @@
 {
-  description = "DarmCamp static Marko site";
+  description = "DarmCamp static HTML site";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
