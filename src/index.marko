@@ -15,52 +15,49 @@
         <style>${"__INLINE_GLOBALS_CSS__"}</style>
     </head>
     <body>
-        <div id="__next">
-            <section class="hero">
-                <div class="heroBg" aria-hidden="true"/>
-                <div class="heroContent">
-                    <p class="heroEyebrow">✦ Mainz, Germany · Summer 2026 ✦</p>
-                    <h1 class="heroTitle">Go<br><span>Touch</span><br>Grass</h1>
-                    <p class="heroSubtitle">
+        <section class="hero">
+            <div aria-hidden="true"/>
+            <div>
+                <p>✦ Mainz, Germany · Summer 2026 ✦</p>
+                <h1>Go<br><span>Touch</span><br>Grass</h1>
+                <p>
                         The <strong>universe</strong> is calling you, dear child
                         of the terminal. Put down the keyboard. Feel the dew.
                         <em>Be free.</em>
-                    </p>
-                </div>
-                <div class="scrollCta" aria-label="Scroll down">
-                    <span>Scroll to enlightenment</span>
-                    <div class="scrollArrow"/>
-                </div>
-            </section>
-
-            <div class="marqueeBar" aria-hidden="true">
-                <div class="marqueeTrack">
-                    <span class="marqueeItem">GO TOUCH GRASS</span>
-                    <span class="marqueeItem">FEEL THE EARTH</span>
-                    <span class="marqueeItem">HACK THE PLANET</span>
-                    <span class="marqueeItem">BE HERE NOW</span>
-                    <span class="marqueeItem">DARMCAMP 2026</span>
-                    <span class="marqueeItem">TOUCH GRASS</span>
-                    <span class="marqueeItem">UNPLUG TO PLUG IN</span>
-                    <span class="marqueeItem">
-                        THE GRASS IS GREENER AT DARMCAMP
-                    </span>
-                </div>
+                </p>
             </div>
+            <div aria-label="Scroll down">
+                <span>Scroll to enlightenment</span>
+                <div/>
+            </div>
+        </section>
 
-            <section class="about" id="about">
-                <div class="grassDecoLeft" aria-hidden="true">🌿🌿🌿</div>
-                <div class="grassDecoRight" aria-hidden="true">🌿🌿🌿</div>
+        <div class="marquee" aria-hidden="true">
+            <div>
+                <span>GO TOUCH GRASS</span>
+                <span>FEEL THE EARTH</span>
+                <span>HACK THE PLANET</span>
+                <span>BE HERE NOW</span>
+                <span>DARMCAMP 2026</span>
+                <span>TOUCH GRASS</span>
+                <span>UNPLUG TO PLUG IN</span>
+                <span>THE GRASS IS GREENER AT DARMCAMP</span>
+            </div>
+        </div>
+
+        <section class="about" id="about">
+            <div aria-hidden="true">🌿🌿🌿</div>
+            <div aria-hidden="true">🌿🌿🌿</div>
 
                 <header>
-                    <p class="fadeUp delay1">✦ What Is DarmCamp? ✦</p>
-                    <h2 class="fadeUp delay2">
+                    <p class="fadeUp">✦ What Is DarmCamp? ✦</p>
+                    <h2 class="fadeUp">
                         Where <span>Hackers</span> Go<br>Back to the
                         <span>Earth</span>
                     </h2>
                 </header>
 
-                <article class="fadeUp delay3">
+                <article class="fadeUp">
                     <p>
                         The fluorescent lights have been lying to you. The
                         standing desk, the hot-desk, the cold-brew; none of it
@@ -86,7 +83,7 @@
                     </p>
                 </article>
 
-                <blockquote class="fadeUp delay2">
+                <blockquote class="fadeUp">
                     <p>
                         "I came for the <em>open source</em> and stayed for the
                         <em>open sky</em>. I touched so much grass, man. I became
@@ -111,10 +108,7 @@
 
                 <section>
                     <p>✦ Why DarmCamp? ✦</p>
-                    <div
-                        id="explainer-placeholder"
-                        class="explainerPlaceholder"
-                    >
+                    <div id="explainer-placeholder">
                         <div>
                             <div>▶</div>
                             <h3>See the Vision</h3>
@@ -123,7 +117,7 @@
                     </div>
                 </section>
 
-                <aside class="fadeUp delay2">
+                <aside class="fadeUp">
                     <h3>Join the Happening</h3>
                     <p>
                         The earth is patient. The grass grows back every spring.
@@ -135,16 +129,15 @@
                 </aside>
             </section>
 
-            <footer class="footer">
+        <footer>
                 <p>
                     🌿 DARMCAMP · Somewhere in a field · Mainz, Germany ·
                     <a href="mailto:camp@darm.camp">camp@darm.camp</a>
                 </p>
-                <p style="margin-top:0.5rem">
+                <p>
                     Open source · Open heart · Open field · Go touch grass
                 </p>
-            </footer>
-        </div>
+        </footer>
 
         <script>
             (() => {
@@ -286,9 +279,6 @@
                             video.src = "/explainer.mp4";
                             video.controls = true;
                             video.autoplay = true;
-                            video.style.width = "100%";
-                            video.style.height = "100%";
-                            video.style.objectFit = "cover";
 
                             const duckDuration = 1200;
                             const duckTo = 0.1;
