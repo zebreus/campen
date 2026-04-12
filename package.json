@@ -2,9 +2,10 @@
   "name": "darmcamp",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "npm run build && npx serve out",
-    "build": "node scripts/build.cjs",
+    "build": "node scripts/build.js",
     "start": "npx serve out"
   },
   "devDependencies": {
