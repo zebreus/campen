@@ -25,7 +25,7 @@ const FEATURES = [
   {
     icon: '🌻',
     title: 'Free as in Flower',
-    text: 'Open source everything. Open source your heart. No gatekeeping, no hustle culture — just radical openness, mutual aid, and the revolutionary act of just being present, dude.',
+    text: 'Open source everything. Open source your heart. No gatekeeping, no hustle culture. Just radical openness, mutual aid, and the revolutionary act of just being present, dude.',
   },
   {
     icon: '🩸',
@@ -156,8 +156,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>DARMCAMP — Go Touch Grass</title>
-        <meta name="description" content="DarmCamp — the hacker camp where you unplug, touch grass, and hack the revolution. Join us in the field." />
+        <title>DARMCAMP - Go Touch Grass</title>
+        <meta name="description" content="DarmCamp - the hacker camp where you unplug, touch grass, and hack the revolution. Join us in the field." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
       </Head>
@@ -220,8 +220,8 @@ export default function Home() {
         {/* Manifesto */}
         <div className="manifesto fadeUp delay3">
           <p>
-            Listen, brother. Listen, sister. The fluorescent lights have been lying to you.
-            The standing desk, the hot-desk, the cold-brew — none of it is real.
+            The fluorescent lights have been lying to you.
+            The standing desk, the hot-desk, the cold-brew; none of it is real.
             <strong> DarmCamp is real.</strong>
           </p>
           <p>
@@ -236,7 +236,7 @@ export default function Home() {
           </p>
           <p>
             This is not a conference. This is not a hackathon.
-            This is a <em>happening</em> — a festival of minds,
+            This is a <em>happening</em>; a festival of minds,
             a communion of curious souls who believe that the best debugging environment
             is a meadow at golden hour with a cold drink in your hand.
           </p>
@@ -303,25 +303,8 @@ export default function Home() {
           <p style={{ fontSize: 'clamp(1rem,2vw,1.2rem)', color: 'var(--text-muted)', maxWidth: '600px', margin: '1.5rem auto 0', lineHeight: 1.8, fontStyle: 'italic' }}>
             Not metaphorically. Not digitally. Not in a simulated environment with haptic feedback.
             With your actual human hands. On actual grass. Under an actual sky.
-            This is DarmCamp. This is freedom. This is love.
+            This is freedom. This is love. This is DarmCamp.
           </p>
-        </div>
-
-        {/* CTA */}
-        <div className="ctaBlock fadeUp delay2">
-          <h3 className="ctaTitle">🌿 Join the Happening 🌿</h3>
-          <p className="ctaText">
-            The earth is patient. The grass grows back every spring.
-            But DarmCamp only happens once a year, and brother,
-            you do not want to miss it. Sign up. Touch grass.
-            Be transformed.
-          </p>
-          <a
-            href="mailto:camp@darm.camp"
-            className="ctaButton"
-          >
-            🌱 Count Me In
-          </a>
         </div>
 
         {/* EXPLAINER VIDEO */}
@@ -376,7 +359,25 @@ export default function Home() {
             )}
           </div>
         </div>
+
+            {/* CTA */}
+        <div className="ctaBlock fadeUp delay2">
+          <h3 className="ctaTitle">Join the Happening</h3>
+          <p className="ctaText">
+            The earth is patient. The grass grows back every spring.
+            But DarmCamp only happens once a year, and brother,
+            you do not want to miss it. Sign up. Touch grass.
+            Feel the earth reclaim you.
+          </p>
+          <a
+            href="mailto:camp@darm.camp"
+            className="ctaButton"
+          >
+            🌱 Count Me In
+          </a>
+        </div>
       </section>
+
 
       {/* ═══════════════════════════════════════════
           FOOTER
