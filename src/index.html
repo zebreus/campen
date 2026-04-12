@@ -176,7 +176,7 @@
                 const placeholder = document.getElementById("explainer-placeholder");
                 if (placeholder) placeholder.addEventListener("click", () => {
                     const video = Object.assign(document.createElement("video"), { src: "/explainer.mp4", controls: true, autoplay: true });
-                    const sync = () => { if (audio && !audio.paused) ramp(video.paused || video.ended ? 1 : 0.1, 1200); };
+                    const sync = () => { if (audio && !audio.paused) ramp(video.paused || video.ended ? 1 : 0.07, 1200); };
                     for (const ev of ["play", "pause", "ended"]) video.addEventListener(ev, sync);
                     placeholder.replaceChildren(video);
                 }, { once: true });
