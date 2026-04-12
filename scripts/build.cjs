@@ -68,7 +68,7 @@ function main() {
   const html = template.renderSync({}).toString().split(cssPlaceholder).join(processedCss);
   fs.writeFileSync(path.join(outDir, "index.html"), html, "utf8");
 
-  copyRecursive(path.join(root, "public", "assets"), path.join(outDir, "assets"));
+  copyRecursive(path.join(root, "public"), outDir);
 }
 
 main();

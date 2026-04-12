@@ -205,7 +205,7 @@
                     }
 
                     // Lazy-load audio only once playback is attempted.
-                    audio = new Audio("/assets/song.mp3");
+                    audio = new Audio("/song.mp3");
                     audio.loop = true;
                     return audio;
                 };
@@ -298,7 +298,7 @@
                         "click",
                         () => {
                             const video = document.createElement("video");
-                            video.src = "/assets/explainer.mp4";
+                            video.src = "/explainer.mp4";
                             video.controls = true;
                             video.autoplay = true;
                             video.style.width = "100%";

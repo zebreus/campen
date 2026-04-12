@@ -39,8 +39,8 @@ jobs:
       - name: Verify output files
         run: |
           test -f out/index.html
-          test -f out/assets/song.mp3
-          test -f out/assets/explainer.mp4
+          test -f out/song.mp3
+          test -f out/explainer.mp4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
